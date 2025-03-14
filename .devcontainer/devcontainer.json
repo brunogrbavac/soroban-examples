@@ -1,0 +1,23 @@
+{
+    "name": "Soroban Development Environment",
+    "build": {
+      "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": ["rust-lang.rust-analyzer", "vadimcn.vscode-lldb"],
+        "settings": {
+          "terminal.integrated.defaultProfile.linux": "bash",
+          "rust-analyzer.check.command": "clippy"
+        }
+      }
+    },
+    "forwardPorts": [4226],
+    "postCreateCommand": "chmod +x .devcontainer/build.sh .devcontainer/testnet.sh",
+    "postStartCommand": ".devcontainer/build.sh",
+    "postAttachCommand": "echo \"Build is running in the background. Monitor with: tail -f /home/dev/logs/make.log\n\nFor a testnet terminal, run: .devcontainer/testnet.sh\"",
+    "containerEnv": {
+      "SOROBAN_RPC_URL": "https://soroban-testnet.stellar.org",
+      "SOROBAN_NETWORK_PASSPHRASE": "Test SDF Network ; September 2015"
+    }
+  }
